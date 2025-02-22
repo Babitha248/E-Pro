@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
+from decouple import config
 import os
 # from dotenv import load_dotenv # type: ignore
 
@@ -31,14 +33,14 @@ django.utils.encoding.forcer_text = force_str
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y=%-k9x#xwz73*$vu)w-j51sk62vf7zk4#=9cykt&i!f#v-6&6'
+SECRET_KEY = config("SECRET_KEY")
 # STRIPE_SECRET_KEY = 'your_stripe_secret_key'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
 
 # Application definition
@@ -114,6 +116,7 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse(config("DATABASE_URL"))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
