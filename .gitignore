@@ -8,3 +8,6 @@ db.sqlite3
 /media/
 staticfiles/
 
+# Ignore virtual environments
+venv/
+myenv/
