@@ -10,4 +10,3 @@ staticfiles/
 
 # Ignore virtual environments
 venv/
-myenv/
